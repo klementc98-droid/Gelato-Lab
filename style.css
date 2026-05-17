@@ -2375,6 +2375,11 @@ footer {
   }
 }
 
+/* Hidden on desktop, only shown on mobile in orbit layout */
+.orbit-photo {
+  display: none;
+}
+
 /* ── Mobile (≤768px) ─────────────────────────────────────────── */
 @media (max-width: 768px) {
 
@@ -2395,15 +2400,37 @@ footer {
     order: -1;
     height: auto;
     min-height: unset;
-    padding: 20px 16px;
+    padding: 24px 16px 32px;
+    position: relative;
+    overflow: visible;
   }
   .hero-video-frame {
-    width: 72%;
+    width: 52%;
     height: auto;
     aspect-ratio: 9 / 16;
     max-width: none;
-    border-radius: 20px;
+    border-radius: 18px;
+    z-index: 2;
   }
+
+  /* Orbit photos circling the video */
+  .orbit-photo {
+    display: block;
+    position: absolute;
+    width: 22vw;
+    height: 22vw;
+    max-width: 95px;
+    max-height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18), 0 0 0 2px rgba(168,184,153,0.4);
+    z-index: 3;
+  }
+  .orbit-tl { top: 14%; left: 6%; }
+  .orbit-tr { top: 14%; right: 6%; }
+  .orbit-bl { bottom: 16%; left: 6%; }
+  .orbit-br { bottom: 16%; right: 6%; }
   .hero-chips {
     gap: 6px;
   }
