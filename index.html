@@ -153,11 +153,13 @@
   </div>
   <div class="hero-orbit-divider">
     <img class="orbit-circle" src="images/SnapInsta.to_619912378_18084142961136741_6991953367678570137_n.jpg" alt="Three colourful gelato scoops on a cone">
-    <img class="orbit-circle" src="images/unnamed121.jpg" alt="Strawberry gelato">
+    <img class="orbit-circle" src="images/unnamed121.jpg" alt="Strawberry gelato with fresh strawberries">
     <img class="orbit-circle" src="images/gelato-2.jpg" alt="Pistachio and hazelnut gelato display">
-    <img class="orbit-circle" src="images/SnapInsta.to_675328322_18078210443551506_681018210460205375_n.jpg" alt="Gelato Lab signature cone">
+    <img class="orbit-circle" src="images/SnapInsta.to_675328322_18078210443551506_681018210460205375_n.jpg" alt="Gelato Lab signature cone with branded biscuit">
     <img class="orbit-circle" src="images/unnamed21.jpg" alt="Lotus biscuit gelato">
-    <img class="orbit-circle" src="images/SnapInsta.to_622496555_18026401811609127_3222642213352437400_n.jpg" alt="Hazelnut gelato">
+    <img class="orbit-circle" src="images/SnapInsta.to_622496555_18026401811609127_3222642213352437400_n.jpg" alt="Hazelnut gelato with whole hazelnuts">
+    <img class="orbit-circle" src="images/gelato-1.jpg" alt="Gelato display with chocolate and berry drizzle">
+    <img class="orbit-circle" src="images/gEL.jpg" alt="Affogato — vanilla gelato in espresso">
   </div>
 
   <div class="hero-split-media">
@@ -356,6 +358,17 @@
   </div>
 </footer>
 
+<div id="photoModal" class="photo-modal" aria-hidden="true">
+  <div class="photo-modal-backdrop"></div>
+  <button class="photo-modal-close" id="photoModalClose" aria-label="Close photo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <img id="photoModalImg" class="photo-modal-img" src="" alt="">
+</div>
+
 <script>
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -500,6 +513,31 @@
 
   startAuto();
 
+  // Orbit photo lightbox modal
+  const photoModal = document.getElementById('photoModal');
+  const photoModalImg = document.getElementById('photoModalImg');
+  const photoModalClose = document.getElementById('photoModalClose');
+  const photoBackdrop = photoModal.querySelector('.photo-modal-backdrop');
+
+  document.querySelectorAll('.orbit-circle').forEach(img => {
+    img.addEventListener('click', () => {
+      photoModalImg.src = img.src;
+      photoModalImg.alt = img.alt;
+      photoModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  const closePhotoModal = () => {
+    photoModal.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  photoModalClose.addEventListener('click', closePhotoModal);
+  photoBackdrop.addEventListener('click', closePhotoModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && photoModal.classList.contains('open')) closePhotoModal();
+  });
 </script>
 </body>
 </html>
