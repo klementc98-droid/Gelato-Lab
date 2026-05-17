@@ -156,21 +156,23 @@
     </div>
   </div>
   <div class="hero-split-media">
-    <div class="hero-slideshow" id="heroSlideshow">
-      <div class="hero-slide active">
-        <img src="images/SnapInsta.to_621468457_18070999622408447_4140659916754461827_n.jpg" alt="Gelato being crafted in the studio machine">
-      </div>
-      <div class="hero-slide">
-        <img src="images/gelato-2.jpg" alt="Fresh gelato flavours in the display case">
-      </div>
-      <div class="hero-slide">
-        <img src="images/SnapInsta.to_619912378_18084142961136741_6991953367678570137_n.jpg" alt="Three colourful gelato scoops on a cone">
-      </div>
-      <div class="hero-slide">
-        <img src="images/SnapInsta.to_675328322_18078210443551506_681018210460205375_n.jpg" alt="Gelato Lab signature cone">
-      </div>
+    <div class="hero-video-frame">
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback">
+        <source src="images/hero-video.mp4" type="video/mp4">
+      </video>
+      <button class="hero-mute-btn" id="heroMuteBtn" aria-label="Toggle sound">
+        <!-- Muted icon (shown by default) -->
+        <svg id="heroIconMuted" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+        </svg>
+        <!-- Sound on icon (hidden by default) -->
+        <svg id="heroIconSound" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+      </button>
     </div>
-    <div class="hero-slide-dots" id="heroSlideDots"></div>
   </div>
 </section>
 
@@ -371,28 +373,37 @@
   document.addEventListener('keydown', onInteract, { passive: true });
   document.addEventListener('touchstart', onInteract, { passive: true });
 
-  // Hero photo slideshow
-  const heroSlides = document.querySelectorAll('.hero-slide');
-  const heroDotsWrap = document.getElementById('heroSlideDots');
-  let heroIdx = 0;
+  // Hero video
+  const heroVideo = document.getElementById('heroVideo');
+  const heroMuteBtn = document.getElementById('heroMuteBtn');
+  const heroIconMuted = document.getElementById('heroIconMuted');
+  const heroIconSound = document.getElementById('heroIconSound');
 
-  heroSlides.forEach((_, i) => {
-    const d = document.createElement('span');
-    d.className = 'hero-slide-dot' + (i === 0 ? ' active' : '');
-    heroDotsWrap.appendChild(d);
-  });
+  heroVideo.addEventListener('contextmenu', e => e.preventDefault());
+  heroVideo.muted = true;
+  heroVideo.play().catch(() => {});
 
-  const heroDots = heroDotsWrap.querySelectorAll('.hero-slide-dot');
-
-  const goToSlide = (n) => {
-    heroSlides[heroIdx].classList.remove('active');
-    heroDots[heroIdx].classList.remove('active');
-    heroIdx = (n + heroSlides.length) % heroSlides.length;
-    heroSlides[heroIdx].classList.add('active');
-    heroDots[heroIdx].classList.add('active');
+  // Auto-unmute on first user gesture
+  const heroUnlock = () => {
+    heroVideo.muted = false;
+    heroIconMuted.style.display = 'none';
+    heroIconSound.style.display = 'block';
+    document.removeEventListener('click', heroUnlock);
+    document.removeEventListener('touchstart', heroUnlock);
   };
+  document.addEventListener('click', heroUnlock, { passive: true });
+  document.addEventListener('touchstart', heroUnlock, { passive: true });
 
-  setInterval(() => goToSlide(heroIdx + 1), 4500);
+  // Mute / unmute button
+  heroMuteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    heroVideo.muted = !heroVideo.muted;
+    heroIconMuted.style.display = heroVideo.muted ? 'block' : 'none';
+    heroIconSound.style.display = heroVideo.muted ? 'none' : 'block';
+    // Remove auto-unlock since user took control
+    document.removeEventListener('click', heroUnlock);
+    document.removeEventListener('touchstart', heroUnlock);
+  });
 
   // Review slider
   const track = document.getElementById('reviewsTrack');
