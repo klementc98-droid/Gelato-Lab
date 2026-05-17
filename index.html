@@ -156,7 +156,21 @@
     </div>
   </div>
   <div class="hero-split-media">
-    <img src="images/SnapInsta.to_675328322_18078210443551506_681018210460205375_n.jpg" alt="Gelato cone with yellow and red scoops">
+    <div class="hero-slideshow" id="heroSlideshow">
+      <div class="hero-slide active">
+        <img src="images/SnapInsta.to_621468457_18070999622408447_4140659916754461827_n.jpg" alt="Gelato being crafted in the studio machine">
+      </div>
+      <div class="hero-slide">
+        <img src="images/gelato-2.jpg" alt="Fresh gelato flavours in the display case">
+      </div>
+      <div class="hero-slide">
+        <img src="images/SnapInsta.to_619912378_18084142961136741_6991953367678570137_n.jpg" alt="Three colourful gelato scoops on a cone">
+      </div>
+      <div class="hero-slide">
+        <img src="images/SnapInsta.to_675328322_18078210443551506_681018210460205375_n.jpg" alt="Gelato Lab signature cone">
+      </div>
+    </div>
+    <div class="hero-slide-dots" id="heroSlideDots"></div>
   </div>
 </section>
 
@@ -356,6 +370,29 @@
   document.addEventListener('click', onInteract, { passive: true });
   document.addEventListener('keydown', onInteract, { passive: true });
   document.addEventListener('touchstart', onInteract, { passive: true });
+
+  // Hero photo slideshow
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroDotsWrap = document.getElementById('heroSlideDots');
+  let heroIdx = 0;
+
+  heroSlides.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'hero-slide-dot' + (i === 0 ? ' active' : '');
+    heroDotsWrap.appendChild(d);
+  });
+
+  const heroDots = heroDotsWrap.querySelectorAll('.hero-slide-dot');
+
+  const goToSlide = (n) => {
+    heroSlides[heroIdx].classList.remove('active');
+    heroDots[heroIdx].classList.remove('active');
+    heroIdx = (n + heroSlides.length) % heroSlides.length;
+    heroSlides[heroIdx].classList.add('active');
+    heroDots[heroIdx].classList.add('active');
+  };
+
+  setInterval(() => goToSlide(heroIdx + 1), 4500);
 
   // Review slider
   const track = document.getElementById('reviewsTrack');
