@@ -2336,13 +2336,15 @@ footer {
   }
   .hero-split-media {
     order: -1;
-    height: 80vw;
+    height: auto;
     min-height: unset;
-    max-height: 480px;
+    padding: 20px 16px;
   }
   .hero-video-frame {
-    height: 100%;
-    max-width: calc(100% - 32px);
+    width: 72%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    max-width: none;
     border-radius: 20px;
   }
   .hero-chips {
@@ -2382,12 +2384,15 @@ footer {
   }
   .our-lab-video-col {
     order: -1;
-    height: 80vw;
-    max-height: 480px;
+    height: auto;
+    max-height: none;
+    padding: 0 16px;
   }
   .our-lab-video-frame {
-    height: 100%;
-    max-width: calc(100% - 24px);
+    width: 72%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    max-width: none;
     border-radius: 20px;
   }
   .our-lab-inner {
