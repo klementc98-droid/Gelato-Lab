@@ -2500,14 +2500,14 @@ footer {
 /* ── Mobile (≤768px) ─────────────────────────────────────────── */
 @media (max-width: 768px) {
 
-  /* Hero — 4 photo strips above/below text, video at bottom */
+  /* Hero — video first, then 4 photos, text, 4 photos */
   .hero-split {
     grid-template-columns: 1fr;
     grid-template-areas:
+      "media"
       "orbit-top"
       "copy"
-      "orbit-bottom"
-      "media";
+      "orbit-bottom";
     min-height: unset;
   }
   .hero-orbit-divider {
@@ -2593,6 +2593,7 @@ footer {
     gap: 40px;
   }
   .our-lab-video-col {
+    order: -1;
     height: auto;
     max-height: none;
     padding: 0 16px;
