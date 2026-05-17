@@ -179,51 +179,66 @@
 <section class="our-lab-section">
   <div class="our-lab-inner">
 
-    <div class="our-lab-top">
-      <div class="our-lab-heading">
+    <div class="our-lab-split">
+
+      <div class="our-lab-content">
         <div class="our-lab-label">Our Lab</div>
         <h2>Where gelato is<br>engineered with care.</h2>
         <p>Gelato Lab is built like a working atelier. Our studio is configured for precise temperature control, ingredient clarity and texture tuning — so every batch is consistently refined from first stir to final scoop.</p>
-      </div>
-      <div class="our-lab-stats">
-        <div class="our-lab-stat">
-          <strong>13+</strong>
-          <span>Years of craft</span>
-        </div>
-        <div class="our-lab-stat">
-          <strong>100%</strong>
-          <span>Natural ingredients</span>
-        </div>
-        <div class="our-lab-stat">
-          <strong>Daily</strong>
-          <span>Fresh batches</span>
-        </div>
-        <div class="our-lab-stat">
-          <strong>4.7★</strong>
-          <span>Google rating</span>
-        </div>
-      </div>
-    </div>
 
-    <div class="our-lab-video-wrap">
-      <video id="labVideo" autoplay muted loop playsinline preload="auto" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback">
-        <source src="images/hero-video.mp4" type="video/mp4">
-      </video>
-    </div>
+        <div class="our-lab-stats">
+          <div class="our-lab-stat">
+            <strong>13+</strong>
+            <span>Years of craft</span>
+          </div>
+          <div class="our-lab-stat">
+            <strong>100%</strong>
+            <span>Natural ingredients</span>
+          </div>
+          <div class="our-lab-stat">
+            <strong>Daily</strong>
+            <span>Fresh batches</span>
+          </div>
+          <div class="our-lab-stat">
+            <strong>4.7★</strong>
+            <span>Google rating</span>
+          </div>
+        </div>
 
-    <div class="our-lab-pillars">
-      <div class="our-lab-pillar">
-        <strong>Controlled environment</strong>
-        <p>Temperature, humidity and timing are calibrated for clean, consistent gelato texture.</p>
+        <div class="our-lab-pillars">
+          <div class="our-lab-pillar">
+            <strong>Controlled environment</strong>
+            <p>Temperature, humidity and timing are calibrated for clean, consistent gelato texture.</p>
+          </div>
+          <div class="our-lab-pillar">
+            <strong>Ingredient-first</strong>
+            <p>Real dairy, seasonal fruit, premium cocoa and plant-based flavors — no stabilizers.</p>
+          </div>
+          <div class="our-lab-pillar">
+            <strong>Intentional craft</strong>
+            <p>Small batches, repeatable recipes and detailed tasting notes for every flavor.</p>
+          </div>
+        </div>
       </div>
-      <div class="our-lab-pillar">
-        <strong>Ingredient-first</strong>
-        <p>Real dairy, seasonal fruit, premium cocoa and plant-based flavors — no stabilizers.</p>
+
+      <div class="our-lab-video-col">
+        <div class="our-lab-video-frame">
+          <video id="labVideo" autoplay muted loop playsinline preload="auto" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback">
+            <source src="images/hero-video.mp4" type="video/mp4">
+          </video>
+          <button class="hero-mute-btn" id="labMuteBtn" aria-label="Toggle sound">
+            <svg id="labIconMuted" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+            <svg id="labIconSound" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+          </button>
+        </div>
       </div>
-      <div class="our-lab-pillar">
-        <strong>Intentional craft</strong>
-        <p>Small batches, repeatable recipes and detailed tasting notes for every flavor.</p>
-      </div>
+
     </div>
 
     <div class="our-lab-photos">
@@ -435,6 +450,35 @@
   document.getElementById('reviewNext').addEventListener('click', () => { goTo(current + 1); startAuto(); });
 
   startAuto();
+
+  // Our Lab video mute button
+  const labVideo = document.getElementById('labVideo');
+  const labMuteBtn = document.getElementById('labMuteBtn');
+  const labIconMuted = document.getElementById('labIconMuted');
+  const labIconSound = document.getElementById('labIconSound');
+
+  labVideo.addEventListener('contextmenu', e => e.preventDefault());
+  labVideo.muted = true;
+  labVideo.play().catch(() => {});
+
+  const labUnlock = () => {
+    labVideo.muted = false;
+    labIconMuted.style.display = 'none';
+    labIconSound.style.display = 'block';
+    document.removeEventListener('click', labUnlock);
+    document.removeEventListener('touchstart', labUnlock);
+  };
+  document.addEventListener('click', labUnlock, { passive: true });
+  document.addEventListener('touchstart', labUnlock, { passive: true });
+
+  labMuteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    labVideo.muted = !labVideo.muted;
+    labIconMuted.style.display = labVideo.muted ? 'block' : 'none';
+    labIconSound.style.display = labVideo.muted ? 'none' : 'block';
+    document.removeEventListener('click', labUnlock);
+    document.removeEventListener('touchstart', labUnlock);
+  });
 
   // Sound on when video is visible, mute when scrolled away
   new IntersectionObserver((entries) => {
