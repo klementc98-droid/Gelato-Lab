@@ -2677,13 +2677,17 @@ footer {
     padding: 20px 16px;
   }
   .hero-video-frame {
-    width: 72%;
+    width: 88%;
     height: auto;
     aspect-ratio: 9 / 16;
     max-width: none;
     border-radius: 18px;
     border: none;
     box-shadow: 0 14px 36px rgba(0,0,0,0.22);
+  }
+  .hero-video-frame video {
+    object-fit: cover;
+    transition: transform 0.4s ease;
   }
   .hero-chips {
     gap: 6px;
@@ -2727,13 +2731,17 @@ footer {
     padding: 0 16px;
   }
   .our-lab-video-frame {
-    width: 72%;
+    width: 88%;
     height: auto;
     aspect-ratio: 9 / 16;
     max-width: none;
     border-radius: 18px;
     border: none;
     box-shadow: 0 14px 36px rgba(0,0,0,0.32);
+  }
+  .our-lab-video-frame video {
+    object-fit: cover;
+    transition: transform 0.4s ease;
   }
   .our-lab-inner {
     gap: 40px;
