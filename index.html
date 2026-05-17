@@ -360,64 +360,77 @@
   const mobileNav = document.getElementById('mobileNav');
   hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
 
-  const video = document.getElementById('labVideo');
-  video.addEventListener('contextmenu', e => e.preventDefault());
-
-  video.muted = true;
-  video.play().catch(() => {});
-
-  let videoVisible = false;
-  let userInteracted = false;
-
-  const tryUnmute = () => {
-    if (videoVisible && userInteracted) {
-      video.muted = false;
-      video.volume = 1;
-    }
-  };
-
-  // Browser requires a real user gesture before allowing sound
-  const onInteract = () => {
-    userInteracted = true;
-    tryUnmute();
-    document.removeEventListener('click', onInteract);
-    document.removeEventListener('keydown', onInteract);
-    document.removeEventListener('touchstart', onInteract);
-  };
-  document.addEventListener('click', onInteract, { passive: true });
-  document.addEventListener('keydown', onInteract, { passive: true });
-  document.addEventListener('touchstart', onInteract, { passive: true });
-
-  // Hero video
-  const heroVideo = document.getElementById('heroVideo');
+  // ── Video sound system ───────────────────────────────────────
+  const heroVideo   = document.getElementById('heroVideo');
+  const labVideo    = document.getElementById('labVideo');
   const heroMuteBtn = document.getElementById('heroMuteBtn');
+  const labMuteBtn  = document.getElementById('labMuteBtn');
   const heroIconMuted = document.getElementById('heroIconMuted');
   const heroIconSound = document.getElementById('heroIconSound');
+  const labIconMuted  = document.getElementById('labIconMuted');
+  const labIconSound  = document.getElementById('labIconSound');
 
-  heroVideo.addEventListener('contextmenu', e => e.preventDefault());
-  heroVideo.muted = true;
-  heroVideo.play().catch(() => {});
+  let soundAllowed = false;
+  let heroVisible  = false;
+  let labVisible   = false;
 
-  // Auto-unmute on first user gesture
-  const heroUnlock = () => {
-    heroVideo.muted = false;
-    heroIconMuted.style.display = 'none';
-    heroIconSound.style.display = 'block';
-    document.removeEventListener('click', heroUnlock);
-    document.removeEventListener('touchstart', heroUnlock);
+  [heroVideo, labVideo].forEach(v => {
+    v.muted = true;
+    v.addEventListener('contextmenu', e => e.preventDefault());
+    v.play().catch(() => {});
+  });
+
+  const setSound = (vid, iconMuted, iconSound, on) => {
+    vid.muted = !on;
+    iconMuted.style.display = on ? 'none' : 'block';
+    iconSound.style.display  = on ? 'block' : 'none';
   };
-  document.addEventListener('click', heroUnlock, { passive: true });
-  document.addEventListener('touchstart', heroUnlock, { passive: true });
 
-  // Mute / unmute button
+  // Any click anywhere → enable sound on visible videos
+  document.addEventListener('click', () => {
+    soundAllowed = true;
+    if (heroVisible) setSound(heroVideo, heroIconMuted, heroIconSound, true);
+    if (labVisible)  setSound(labVideo,  labIconMuted,  labIconSound,  true);
+  }, { passive: true });
+
+  // Mute buttons toggle (stopPropagation so the doc click doesn't immediately re-enable)
   heroMuteBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    heroVideo.muted = !heroVideo.muted;
-    heroIconMuted.style.display = heroVideo.muted ? 'block' : 'none';
-    heroIconSound.style.display = heroVideo.muted ? 'none' : 'block';
-    // Remove auto-unlock since user took control
-    document.removeEventListener('click', heroUnlock);
-    document.removeEventListener('touchstart', heroUnlock);
+    soundAllowed = true;
+    setSound(heroVideo, heroIconMuted, heroIconSound, heroVideo.muted);
+  });
+  labMuteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    soundAllowed = true;
+    setSound(labVideo, labIconMuted, labIconSound, labVideo.muted);
+  });
+
+  // Mute when scrolled out of view, unmute when back in view
+  const makeObserver = (vid, iconMuted, iconSound, setVisible) =>
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        setVisible(e.isIntersecting);
+        if (!e.isIntersecting) {
+          setSound(vid, iconMuted, iconSound, false);
+        } else if (soundAllowed) {
+          setSound(vid, iconMuted, iconSound, true);
+        }
+      });
+    }, { threshold: 0.4 });
+
+  makeObserver(heroVideo, heroIconMuted, heroIconSound, v => heroVisible = v).observe(heroVideo);
+  makeObserver(labVideo,  labIconMuted,  labIconSound,  v => labVisible  = v).observe(labVideo);
+
+  // Leave tab → mute both; come back → unmute visible ones automatically
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      soundAllowed = true;
+      if (heroVisible) { setSound(heroVideo, heroIconMuted, heroIconSound, true); heroVideo.play().catch(() => {}); }
+      if (labVisible)  { setSound(labVideo,  labIconMuted,  labIconSound,  true); labVideo.play().catch(() => {}); }
+    } else {
+      setSound(heroVideo, heroIconMuted, heroIconSound, false);
+      setSound(labVideo,  labIconMuted,  labIconSound,  false);
+    }
   });
 
   // Review slider
@@ -451,46 +464,6 @@
 
   startAuto();
 
-  // Our Lab video mute button
-  const labVideo = document.getElementById('labVideo');
-  const labMuteBtn = document.getElementById('labMuteBtn');
-  const labIconMuted = document.getElementById('labIconMuted');
-  const labIconSound = document.getElementById('labIconSound');
-
-  labVideo.addEventListener('contextmenu', e => e.preventDefault());
-  labVideo.muted = true;
-  labVideo.play().catch(() => {});
-
-  const labUnlock = () => {
-    labVideo.muted = false;
-    labIconMuted.style.display = 'none';
-    labIconSound.style.display = 'block';
-    document.removeEventListener('click', labUnlock);
-    document.removeEventListener('touchstart', labUnlock);
-  };
-  document.addEventListener('click', labUnlock, { passive: true });
-  document.addEventListener('touchstart', labUnlock, { passive: true });
-
-  labMuteBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    labVideo.muted = !labVideo.muted;
-    labIconMuted.style.display = labVideo.muted ? 'block' : 'none';
-    labIconSound.style.display = labVideo.muted ? 'none' : 'block';
-    document.removeEventListener('click', labUnlock);
-    document.removeEventListener('touchstart', labUnlock);
-  });
-
-  // Sound on when video is visible, mute when scrolled away
-  new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      videoVisible = entry.isIntersecting;
-      if (entry.isIntersecting) {
-        tryUnmute();
-      } else {
-        video.muted = true;
-      }
-    });
-  }, { threshold: 0.5 }).observe(video);
 </script>
 </body>
 </html>
