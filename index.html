@@ -393,7 +393,22 @@
     if (labVisible)  setSound(labVideo,  labIconMuted,  labIconSound,  true);
   }, { passive: true });
 
-  // Mute buttons toggle (stopPropagation so the doc click doesn't immediately re-enable)
+  // Click on video frame = toggle sound
+  const toggleSound = (vid, iconMuted, iconSound, e) => {
+    soundAllowed = true;
+    const turningOn = vid.muted;
+    if (!turningOn) e.stopPropagation(); // muting: prevent doc handler re-enabling
+    setSound(vid, iconMuted, iconSound, turningOn);
+  };
+
+  document.querySelector('.hero-video-frame').addEventListener('click', (e) => {
+    toggleSound(heroVideo, heroIconMuted, heroIconSound, e);
+  });
+  document.querySelector('.our-lab-video-frame').addEventListener('click', (e) => {
+    toggleSound(labVideo, labIconMuted, labIconSound, e);
+  });
+
+  // Mute buttons also toggle (stopPropagation so the doc click doesn't interfere)
   heroMuteBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     soundAllowed = true;

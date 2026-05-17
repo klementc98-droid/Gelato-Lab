@@ -1446,11 +1446,12 @@ nav.scrolled {
 
 .our-lab-video-frame {
   position: relative;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 100px);
   aspect-ratio: 9 / 16;
   max-width: 100%;
   border-radius: 24px;
   overflow: hidden;
+  cursor: pointer;
   border: 2px solid rgba(168,184,153,0.25);
   box-shadow:
     0 0 0 5px rgba(200,219,168,0.1),
@@ -2338,11 +2339,12 @@ footer {
 
 .hero-video-frame {
   position: relative;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 100px);
   aspect-ratio: 9 / 16;
-  max-width: calc(100% - 80px);
+  max-width: calc(100% - 40px);
   border-radius: 28px;
   overflow: hidden;
+  cursor: pointer;
   border: 2.5px solid var(--olive-soft);
   box-shadow:
     0 0 0 6px rgba(200,219,168,0.22),
