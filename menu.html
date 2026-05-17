@@ -140,7 +140,10 @@
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
-  hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open');
+  });
 
   // Menu Modal Functionality
   const menus = [
