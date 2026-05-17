@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu — Gelato Lab Karlskrona</title>
+  <meta name="description" content="Olive green Scandinavian menu for Gelato Lab Karlskrona. Coffee, hot chocolate, milkshakes, gelato and take-home boxes.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/SnapInsta.to_659106997_18074643134551506_6275547762048214726_n.jpg" alt="Gelato Lab logo" class="nav-logo-image">
+    <div>
+      <div class="nav-logo-name">Gelato Lab</div>
+      <div class="nav-logo-sub">Frozen Experiments</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="menu.html" class="active">Menu</a>
+    <a href="about.html">About</a>
+    <a href="about.html#contact">Contact</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="about.html">About Us</a>
+  <a href="about.html#contact">Contact</a>
+</div>
+
+<div class="menu-body">
+  <!-- Intro removed per request -->
+  <div class="menu-scan-grid">
+    <article class="menu-scan" onclick="openMenuModal(0)" data-menu-index="0">
+      <div class="menu-scan-header">
+        <h2>Seasonal Selection & Classics</h2>
+      </div>
+      <img src="images/menu1.png" alt="Gelato Lab gelato menu page 1" class="menu-thumbnail">
+    </article>
+    <article class="menu-scan" onclick="openMenuModal(1)" data-menu-index="1">
+      <div class="menu-scan-header">
+        <h2>Belgian Waffles & Toppings</h2>
+      </div>
+      <img src="images/menu2.png" alt="Gelato Lab waffle menu page 1" class="menu-thumbnail">
+    </article>
+    <article class="menu-scan" onclick="openMenuModal(2)" data-menu-index="2">
+      <div class="menu-scan-header">
+        <h2>Specialty Combinations</h2>
+      </div>
+      <img src="images/menu3.png" alt="Gelato Lab waffle menu page 2" class="menu-thumbnail">
+    </article>
+  </div>
+
+  <!-- Menu Modal -->
+  <div id="menuModal" class="menu-modal" onclick="closeMenuModal(event)">
+    <div class="menu-modal-content" onclick="event.stopPropagation()">
+      <button class="menu-modal-close" onclick="closeMenuModal()" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="menu-modal-header">
+        <h2 id="modalTitle"></h2>
+        <p id="modalSubtitle"></p>
+      </div>
+      <div class="menu-modal-body">
+        <img id="modalImage" src="" alt="Menu" class="menu-modal-image">
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid page-wrapper">
+    <div class="footer-brand">
+      <div class="footer-logo-name">Gelato Lab</div>
+      <div class="footer-slogan">Frozen Experiments</div>
+      <p>Handcrafted gelato made fresh daily in Karlskrona, Sweden.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About Us</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <p>Borgmästaregatan 14<br>Karlskrona, 37115</p>
+      <p>Mon–Sun: 10:00–19:00</p>
+      <a class="footer-link" href="mailto:Info@gelato-lab.se">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="3" />
+          <path d="M3 7l9 6 9-6" />
+        </svg>
+        Info@gelato-lab.se
+      </a>
+      <a class="footer-link" href="https://instagram.com/gelatolab_karlskrona" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+          <path d="M16 11.37a4 4 0 1 1-4.37-4.37 4 4 0 0 1 4.37 4.37z" />
+          <path d="M17.5 6.5h.01" />
+        </svg>
+        Instagram
+      </a>
+      <a class="footer-link" href="https://share.google/L7elpZVyy0P3SIsA5" target="_blank" style="margin-top:12px;">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>
+        Google reviews
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom page-wrapper">
+    <span>© 2026 Gelato Lab Karlskrona. All rights reserved.</span>
+    <div class="footer-social">
+      <a href="https://instagram.com/gelatolab_karlskrona" target="_blank" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a class="footer-link" href="https://share.google/L7elpZVyy0P3SIsA5" target="_blank" aria-label="Google reviews">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <span>Google reviews</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+
+  // Menu Modal Functionality
+  const menus = [
+    {
+      title: 'Seasonal Selection & Classics',
+      image: 'images/menu1.png'
+    },
+    {
+      title: 'Belgian Waffles & Toppings',
+      image: 'images/menu2.png'
+    },
+    {
+      title: 'Specialty Combinations',
+      image: 'images/menu3.png'
+    }
+  ];
+
+  function openMenuModal(index) {
+    const menu = menus[index];
+    document.getElementById('modalTitle').textContent = menu.title;
+    document.getElementById('modalSubtitle').textContent = menu.subtitle;
+    document.getElementById('modalImage').src = menu.image;
+    document.getElementById('menuModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenuModal(event) {
+    if (event && event.target.id !== 'menuModal') return;
+    document.getElementById('menuModal').classList.remove('open');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Close modal when pressing Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenuModal();
+  });
+</script>
+</body>
+</html>
