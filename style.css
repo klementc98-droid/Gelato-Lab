@@ -2954,3 +2954,15 @@ footer {
 .our-lab-stat:nth-child(2) strong { color: var(--strawberry); }
 .our-lab-stat:nth-child(3) strong { color: var(--lemon); }
 .our-lab-stat:nth-child(4) strong { color: var(--blueberry); }
+
+/* ── Mobile video fill fix (must come after #heroVideo base rule) ─ */
+@media (max-width: 768px) {
+  #heroVideo,
+  .our-lab-video-frame video {
+    object-fit: cover !important;
+  }
+  .hero-video-frame,
+  .our-lab-video-frame {
+    width: 92% !important;
+  }
+}
