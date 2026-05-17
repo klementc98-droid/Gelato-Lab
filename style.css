@@ -212,8 +212,9 @@ nav.scrolled {
 .hero-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: calc(100vh - 84px);
+  height: 100vh;
   margin-bottom: 72px;
+  overflow: hidden;
 }
 
 .hero-split-copy {
@@ -221,9 +222,16 @@ nav.scrolled {
   flex-direction: column;
   justify-content: flex-start;
   gap: 28px;
-  padding: 56px 72px 72px;
+  padding: 96px 72px 48px;
   background: linear-gradient(160deg, #fffef9 0%, #f0f5e8 55%, #e8f0da 100%);
   min-width: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hero-split-copy::-webkit-scrollbar {
+  display: none;
 }
 
 .hero-split-logo {
@@ -509,13 +517,17 @@ nav.scrolled {
 @media (max-width: 768px) {
   .hero-split {
     grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
   }
   .hero-split-media {
-    min-height: 420px;
+    height: 55vw;
+    min-height: 340px;
     order: -1;
   }
   .hero-split-copy {
-    padding: 48px 28px;
+    padding: 36px 28px 48px;
+    overflow-y: visible;
   }
 }
 
