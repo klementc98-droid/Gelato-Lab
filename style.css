@@ -510,18 +510,6 @@ nav.scrolled {
   display: block;
 }
 
-@media (max-width: 768px) {
-  .hero-split {
-    grid-template-columns: 1fr;
-  }
-  .hero-split-media {
-    min-height: 420px;
-    order: -1;
-  }
-  .hero-split-copy {
-    padding: 48px 28px;
-  }
-}
 
 .hero-visual {
   margin: 24px auto 72px;
@@ -2327,6 +2315,135 @@ footer {
 
   .quality-block h3 {
     font-size: 20px;
+  }
+}
+
+/* ── Mobile (≤768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Hero */
+  .hero-split {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  .hero-split-copy {
+    padding: 100px 22px 36px;
+    gap: 20px;
+    overflow-y: visible;
+  }
+  .hero-split-copy h1 {
+    font-size: clamp(1.9rem, 7vw, 2.6rem);
+  }
+  .hero-split-media {
+    order: -1;
+    height: 80vw;
+    min-height: unset;
+    max-height: 480px;
+  }
+  .hero-video-frame {
+    height: 100%;
+    max-width: calc(100% - 32px);
+    border-radius: 20px;
+  }
+  .hero-chips {
+    gap: 6px;
+  }
+  .hero-chip {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+  }
+  .hero-store-info {
+    display: none;
+  }
+  .hero-info-divider {
+    display: none;
+  }
+  .hero-features {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+  }
+  .hero-reviews {
+    padding-top: 14px;
+  }
+  .hero-review-slide {
+    padding: 14px 16px 12px;
+  }
+  .hero-review-text {
+    font-size: 0.83rem;
+  }
+
+  /* Our Lab */
+  .our-lab-section {
+    padding: 60px 20px;
+  }
+  .our-lab-split {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .our-lab-video-col {
+    order: -1;
+    height: 80vw;
+    max-height: 480px;
+  }
+  .our-lab-video-frame {
+    height: 100%;
+    max-width: calc(100% - 24px);
+    border-radius: 20px;
+  }
+  .our-lab-inner {
+    gap: 40px;
+  }
+  .our-lab-content {
+    gap: 24px;
+  }
+  .our-lab-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+  }
+  .our-lab-stat {
+    padding: 20px 16px;
+  }
+  .our-lab-stat strong {
+    font-size: 1.8rem;
+  }
+  .our-lab-pillar {
+    padding: 22px 20px;
+  }
+  .our-lab-photos {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .our-lab-photos img:last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Contact */
+  .contact-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Footer */
+  .footer-grid {
+    flex-direction: column;
+    gap: 28px;
+    padding: 40px 24px 24px;
+  }
+}
+
+/* ── Small phones (≤420px) ───────────────────────────────────── */
+@media (max-width: 420px) {
+  .hero-split-copy h1 {
+    font-size: 1.75rem;
+  }
+  .hero-split-actions {
+    flex-direction: column;
+  }
+  .hero-split-actions a {
+    text-align: center;
+  }
+  .our-lab-video-col {
+    height: 90vw;
   }
 }
 
