@@ -1843,7 +1843,7 @@ nav.scrolled {
   box-shadow:
     0 0 0 5px rgba(200,219,168,0.1),
     0 32px 80px rgba(0,0,0,0.45);
-  background: #111;
+  background: transparent;
 }
 
 .our-lab-video-frame video {
