@@ -1865,6 +1865,24 @@ nav.scrolled {
   padding: 40px 0;
 }
 
+.lab-divider .orbit-circle {
+  box-shadow:
+    0 0 0 2.5px var(--pistachio),
+    0 0 0 4px rgba(200,219,168,0.18),
+    0 2px 4px rgba(0,0,0,0.18),
+    0 8px 20px rgba(0,0,0,0.28),
+    0 22px 48px rgba(0,0,0,0.22);
+}
+
+.lab-divider .orbit-circle:hover {
+  box-shadow:
+    0 0 0 3px var(--pistachio),
+    0 0 0 6px rgba(200,219,168,0.28),
+    0 4px 8px rgba(0,0,0,0.22),
+    0 12px 26px rgba(0,0,0,0.36),
+    0 28px 56px rgba(0,0,0,0.3);
+}
+
 .lab-divider::before {
   content: '';
   position: absolute;
