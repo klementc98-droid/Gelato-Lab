@@ -370,6 +370,45 @@ nav.scrolled {
   transform: rotate(90deg);
 }
 
+.photo-modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.32);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+  transition: background 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.photo-modal-prev { left: 24px; }
+.photo-modal-next { right: 24px; }
+
+.photo-modal-nav:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.photo-modal-prev:hover { transform: translateY(-50%) translateX(-3px); }
+.photo-modal-next:hover { transform: translateY(-50%) translateX(3px); }
+
+@media (max-width: 600px) {
+  .photo-modal-nav {
+    width: 40px;
+    height: 40px;
+  }
+  .photo-modal-prev { left: 10px; }
+  .photo-modal-next { right: 10px; }
+}
+
 .photo-modal-img {
   position: relative;
   max-width: 92vw;

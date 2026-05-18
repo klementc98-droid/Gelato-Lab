@@ -380,6 +380,16 @@
       <line x1="6" y1="6" x2="18" y2="18"/>
     </svg>
   </button>
+  <button class="photo-modal-nav photo-modal-prev" id="photoModalPrev" aria-label="Previous photo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+  <button class="photo-modal-nav photo-modal-next" id="photoModalNext" aria-label="Next photo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </button>
   <img id="photoModalImg" class="photo-modal-img" src="" alt="">
 </div>
 
@@ -530,16 +540,39 @@
 
   startAuto();
 
-  // Orbit photo lightbox modal
+  // Orbit photo lightbox with prev/next navigation
   const photoModal = document.getElementById('photoModal');
   const photoModalImg = document.getElementById('photoModalImg');
   const photoModalClose = document.getElementById('photoModalClose');
+  const photoModalPrev = document.getElementById('photoModalPrev');
+  const photoModalNext = document.getElementById('photoModalNext');
   const photoBackdrop = photoModal.querySelector('.photo-modal-backdrop');
+
+  // Build a unique photo list (some photos exist in both strips + divider)
+  const photoList = [];
+  document.querySelectorAll('.orbit-circle').forEach(img => {
+    if (!photoList.some(p => p.src === img.src)) {
+      photoList.push({ src: img.src, alt: img.alt });
+    }
+  });
+
+  let photoIdx = 0;
+
+  const showPhoto = (i) => {
+    photoIdx = (i + photoList.length) % photoList.length;
+    const p = photoList[photoIdx];
+    // Replay the zoom animation each time
+    photoModalImg.style.animation = 'none';
+    void photoModalImg.offsetWidth;
+    photoModalImg.style.animation = '';
+    photoModalImg.src = p.src;
+    photoModalImg.alt = p.alt;
+  };
 
   document.querySelectorAll('.orbit-circle').forEach(img => {
     img.addEventListener('click', () => {
-      photoModalImg.src = img.src;
-      photoModalImg.alt = img.alt;
+      photoIdx = photoList.findIndex(p => p.src === img.src);
+      showPhoto(photoIdx);
       photoModal.classList.add('open');
       document.body.style.overflow = 'hidden';
     });
@@ -552,9 +585,25 @@
 
   photoModalClose.addEventListener('click', closePhotoModal);
   photoBackdrop.addEventListener('click', closePhotoModal);
+  photoModalPrev.addEventListener('click', (e) => { e.stopPropagation(); showPhoto(photoIdx - 1); });
+  photoModalNext.addEventListener('click', (e) => { e.stopPropagation(); showPhoto(photoIdx + 1); });
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && photoModal.classList.contains('open')) closePhotoModal();
+    if (!photoModal.classList.contains('open')) return;
+    if (e.key === 'Escape')    closePhotoModal();
+    if (e.key === 'ArrowLeft') showPhoto(photoIdx - 1);
+    if (e.key === 'ArrowRight') showPhoto(photoIdx + 1);
   });
+
+  // Touch swipe on the modal image
+  let photoSwipeStart = 0;
+  photoModalImg.addEventListener('touchstart', e => {
+    photoSwipeStart = e.touches[0].clientX;
+  }, { passive: true });
+  photoModalImg.addEventListener('touchend', e => {
+    const diff = photoSwipeStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) showPhoto(photoIdx + (diff > 0 ? 1 : -1));
+  }, { passive: true });
 </script>
 </body>
 </html>
