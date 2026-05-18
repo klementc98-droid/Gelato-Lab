@@ -1853,7 +1853,10 @@ nav.scrolled {
 .lab-divider {
   grid-column: 2;
   grid-row: 1 / -1;
+  align-self: stretch;
   position: relative;
+  min-height: 100%;
+  width: 100%;
 }
 
 .lab-divider::before {
