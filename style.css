@@ -3090,3 +3090,236 @@ footer {
     width: 92% !important;
   }
 }
+
+/* ────────────────────────────────────────────────────────────── */
+/* OUR LAB — premium restructure                                  */
+/* ────────────────────────────────────────────────────────────── */
+
+.lab-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.lab-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pistachio);
+  box-shadow: 0 0 0 4px rgba(200,219,168,0.18);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(200,219,168,0.18); }
+  50%      { box-shadow: 0 0 0 7px rgba(200,219,168,0.08); }
+}
+
+.lab-eyebrow-text {
+  font-size: 0.72rem;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  font-weight: 600;
+}
+
+.lab-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 3.6vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: #fff;
+  margin: 0;
+}
+
+.lab-heading em {
+  font-style: italic;
+  color: var(--pistachio);
+  font-weight: 500;
+}
+
+.lab-intro {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.lab-intro-accent {
+  width: 2px;
+  background: linear-gradient(to bottom,
+    var(--pistachio) 0%,
+    rgba(200,219,168,0.4) 60%,
+    transparent 100%);
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.lab-intro p {
+  font-size: 1.04rem;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.78);
+  margin: 0;
+  max-width: 52ch;
+  font-weight: 300;
+}
+
+/* ── Stats — editorial breakout row ─────────────────────────── */
+.lab-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 26px 0;
+  margin: 6px 0;
+}
+
+.lab-stat {
+  text-align: center;
+  padding: 0 8px;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lab-stat:hover {
+  transform: translateY(-3px);
+}
+
+.lab-stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 1px;
+  background: rgba(255,255,255,0.1);
+}
+
+.lab-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.lab-stat:nth-child(1) .lab-stat-num { color: var(--pistachio); }
+.lab-stat:nth-child(2) .lab-stat-num { color: var(--strawberry); }
+.lab-stat:nth-child(3) .lab-stat-num { color: var(--lemon); }
+.lab-stat:nth-child(4) .lab-stat-num { color: var(--blueberry); }
+
+.lab-stat-sup {
+  font-size: 0.55em;
+  vertical-align: super;
+  margin-left: 2px;
+  font-weight: 600;
+}
+
+.lab-stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+
+/* ── Pillars — numbered editorial cards ─────────────────────── */
+.lab-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.lab-pillar {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 26px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  align-items: start;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lab-pillar:hover {
+  transform: translateX(6px);
+}
+
+.lab-pillar:last-child {
+  border-bottom: none;
+}
+
+.lab-pillar-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.lab-pillar:nth-child(1) .lab-pillar-num { color: var(--pistachio); }
+.lab-pillar:nth-child(2) .lab-pillar-num { color: var(--strawberry); }
+.lab-pillar:nth-child(3) .lab-pillar-num { color: var(--lemon); }
+
+.lab-pillar-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 8px;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+}
+
+.lab-pillar-body p {
+  color: rgba(255,255,255,0.62);
+  line-height: 1.7;
+  font-size: 0.92rem;
+  margin: 0;
+  font-weight: 300;
+  max-width: 52ch;
+}
+
+.our-lab-body {
+  gap: 44px;
+}
+
+/* Mobile adjustments for the new lab structure */
+@media (max-width: 768px) {
+  .lab-heading {
+    font-size: clamp(1.9rem, 7vw, 2.4rem);
+  }
+  .lab-intro p {
+    font-size: 0.98rem;
+  }
+  .lab-stats-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 0;
+    padding: 24px 0;
+  }
+  .lab-stat:nth-child(2)::after,
+  .lab-stat:nth-child(4)::after {
+    display: none;
+  }
+  .lab-stat-num {
+    font-size: 1.9rem;
+  }
+  .lab-pillar {
+    grid-template-columns: 44px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+  }
+  .lab-pillar-num {
+    font-size: 1.2rem;
+  }
+  .lab-pillar-body h3 {
+    font-size: 1.15rem;
+  }
+  .our-lab-body {
+    gap: 32px;
+  }
+}
