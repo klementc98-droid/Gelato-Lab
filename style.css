@@ -240,7 +240,7 @@ nav.scrolled {
 
 .hero-split {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr 130px 1fr;
   min-height: calc(100vh - 84px);
   margin-bottom: 72px;
   background: linear-gradient(160deg, #fffef9 0%, #f0f5e8 55%, #e8f0da 100%);
@@ -1795,14 +1795,14 @@ nav.scrolled {
 
 .our-lab-section {
   background: #243228;
-  padding: 100px 72px;
+  padding: 100px 0;
   margin-bottom: 100px;
   color: #fff;
 }
 
 .our-lab-inner {
-  max-width: 1320px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 72px;
@@ -1810,18 +1810,22 @@ nav.scrolled {
 
 .our-lab-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
+  grid-template-columns: 1fr 130px 1fr;
+  gap: 0;
   align-items: center;
 }
 
 .our-lab-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 40px;
+  padding: 0 64px;
+  min-width: 0;
 }
 
 .our-lab-video-col {
+  grid-column: 3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1968,6 +1972,10 @@ nav.scrolled {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 64px;
+  width: 100%;
 }
 
 .our-lab-photos img {
