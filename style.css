@@ -592,6 +592,18 @@ nav.scrolled {
   color: var(--text-light);
 }
 
+/* Google brand-colored letters */
+.g-text {
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.g-text > span:nth-child(1) { color: #4285F4; } /* G */
+.g-text > span:nth-child(2) { color: #EA4335; } /* o */
+.g-text > span:nth-child(3) { color: #FBBC05; } /* o */
+.g-text > span:nth-child(4) { color: #4285F4; } /* g */
+.g-text > span:nth-child(5) { color: #34A853; } /* l */
+.g-text > span:nth-child(6) { color: #EA4335; } /* e */
+
 .hero-chips {
   display: flex;
   flex-wrap: wrap;
