@@ -1811,22 +1811,29 @@ nav.scrolled {
 .our-lab-split {
   display: grid;
   grid-template-columns: 1fr 130px 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
   gap: 0;
   align-items: start;
 }
 
-.our-lab-header {
+.lab-eyebrow {
   grid-column: 1;
   grid-row: 1;
   padding: 0 64px;
-  margin-bottom: 36px;
+  margin-bottom: 16px;
+}
+
+.our-lab-header {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 0 64px;
+  margin-bottom: 32px;
   min-width: 0;
 }
 
 .our-lab-body {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 3;
   display: flex;
   flex-direction: column;
   gap: 36px;
@@ -1836,7 +1843,7 @@ nav.scrolled {
 
 .our-lab-video-col {
   grid-column: 3;
-  grid-row: 2;
+  grid-row: 2 / span 2;
   align-self: start;
   display: flex;
   align-items: flex-start;
@@ -2838,6 +2845,7 @@ footer {
     grid-template-rows: auto;
     gap: 32px;
   }
+  .lab-eyebrow,
   .our-lab-header,
   .our-lab-body {
     grid-column: 1;
